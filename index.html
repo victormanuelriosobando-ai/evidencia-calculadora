@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+
+    <style>
+        body {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: black;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .panel {
+            background: white;
+            width: 300px;
+            padding: 15px;
+            border: 1px solid #999;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 7px;
+            box-sizing: border-box;
+            border: 1px solid #888;
+            font-size: 15px;
+        }
+
+        .botones {
+            margin-top: 12px;
+        }
+
+        button {
+            padding: 7px 10px;
+            margin: 3px 2px 3px 0;
+            background: #eee;
+            color: black;
+            border: 1px solid #777;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ddd;
+        }
+
+        .resultado {
+            background: #f5f5f5;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+
+            .panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Calculadora</h1>
+</header>
+
+<div class="contenedor">
+
+    <div class="panel">
+
+        <h2>Panel 1: Números</h2>
+
+        <label>Valor 1</label>
+        <input type="number" id="numero1">
+
+        <label>Valor 2</label>
+        <input type="number" id="numero2">
+
+        <div class="botones">
+            <button onclick="sumar()">Sumar</button>
+            <button onclick="restar()">Restar</button>
+            <button onclick="multiplicar()">Multiplicar</button>
+            <button onclick="dividir()">Dividir</button>
+            <button onclick="raiz()">Raíz</button>
+            <button onclick="esMultiplo()">Es múltiplo</button>
+            <button onclick="compararNumeros()">Comparar</button>
+        </div>
+
+        <label>Resultado</label>
+        <input type="text" id="resultadoNumeros" class="resultado" readonly>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>Panel 2: Textos</h2>
+
+        <label>Texto 1</label>
+        <input type="text" id="texto1">
+
+        <label>Texto 2</label>
+        <input type="text" id="texto2">
+
+        <div class="botones">
+            <button onclick="compararTextos()">Comparar</button>
+            <button onclick="contar()">Contar</button>
+            <button onclick="espacios()">Espacios</button>
+            <button onclick="insertar()">Insertar</button>
+        </div>
+
+        <label>Resultado</label>
+        <input type="text" id="resultadoTextos" class="resultado" readonly>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>Panel 3: Vectores</h2>
+        <input type="text" id="vector">
+
+        <div class="botones">
+            <button onclick="crear()">Crear</button>
+            <button onclick="sumarVector()">Sumar</button>
+            <button onclick="pares()">Pares</button>
+        </div>
+
+        <label>Resultado</label>
+        <input type="text" id="resultadoVector" class="resultado" readonly>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function sumar() {
+        var n1 = document.getElementById("numero1").value;
+        var n2 = document.getElementById("numero2").value;
+
+        if (n1 !== "" && n2 !== "") {
+            document.getElementById("resultadoNumeros").value =
+                Number(n1) + Number(n2);
+        } else {
+            alert("Ingrese los dos valores");
+        }
+    }
+
+    function restar() {
+        var n1 = document.getElementById("numero1").value;
+        var n2 = document.getElementById("numero2").value;
+
+        if (n1 !== "" && n2 !== "") {
+            document.getElementById("resultadoNumeros").value =
+                Number(n1) - Number(n2);
+        } else {
+            alert("Ingrese los dos valores");
+        }
+    }
+
+    function multiplicar() {
+        var n1 = document.getElementById("numero1").value;
+        var n2 = document.getElementById("numero2").value;
+
+        if (n1 !== "" && n2 !== "") {
+            document.getElementById("resultadoNumeros").value =
+                Number(n1) * Number(n2);
+        } else {
+            alert("Ingrese los dos valores");
+        }
+    }
+
+    function dividir() {
+        var n1 = document.getElementById("numero1").value;
+        var n2 = document.getElementById("numero2").value;
+
+        if (n1 !== "" && n2 !== "") {
+            if (Number(n2) !== 0) {
+                document.getElementById("resultadoNumeros").value =
+                    Number(n1) / Number(n2);
+            } else {
+                alert("No se puede dividir entre cero");
+            }
+        } else {
+            alert("Ingrese los dos valores");
+        }
+    }
+
+    function raiz() {
+        var n1 = document.getElementById("numero1").value;
+
+        if (n1 !== "") {
+            if (Number(n1) >= 0) {
+                document.getElementById("resultadoNumeros").value =
+                    Math.sqrt(Number(n1));
+            } else {
+                alert("No se puede sacar raíz de un número negativo");
+            }
+        } else {
+            alert("Ingrese el primer valor");
+        }
+    }
+
+    function esMultiplo() {
+        var n1 = document.getElementById("numero1").value;
+        var n2 = document.getElementById("numero2").value;
+
+        if (n1 !== "" && n2 !== "") {
+            if (Number(n2) !== 0) {
+                if (Number(n1) % Number(n2) === 0) {
+                    document.getElementById("resultadoNumeros").value =
+                        n1 + " es múltiplo de " + n2;
+                } else {
+                    document.getElementById("resultadoNumeros").value =
+                        n1 + " no es múltiplo de " + n2;
+                }
+            } else {
+                alert("El segundo valor no puede ser cero");
+            }
+        } else {
+            alert("Ingrese los dos valores");
+        }
+    }
+
+    function compararNumeros() {
+        var n1 = document.getElementById("numero1").value;
+        var n2 = document.getElementById("numero2").value;
+
+        if (n1 !== "" && n2 !== "") {
+            if (Number(n1) > Number(n2)) {
+                document.getElementById("resultadoNumeros").value =
+                    "El mayor es " + n1;
+            } else if (Number(n2) > Number(n1)) {
+                document.getElementById("resultadoNumeros").value =
+                    "El mayor es " + n2;
+            } else {
+                document.getElementById("resultadoNumeros").value =
+                    "Los dos valores son iguales";
+            }
+        } else {
+            alert("Ingrese los dos valores");
+        }
+    }
+
+    function compararTextos() {
+        var t1 = document.getElementById("texto1").value;
+        var t2 = document.getElementById("texto2").value;
+
+        if (t1 !== "" && t2 !== "") {
+            if (t1.length > t2.length) {
+                document.getElementById("resultadoTextos").value =
+                    "El texto 1 es más largo";
+            } else if (t2.length > t1.length) {
+                document.getElementById("resultadoTextos").value =
+                    "El texto 2 es más largo";
+            } else {
+                document.getElementById("resultadoTextos").value =
+                    "Los textos tienen el mismo tamaño";
+            }
+        } else {
+            alert("Ingrese los dos textos");
+        }
+    }
+
+    function contar() {
+        var t1 = document.getElementById("texto1").value;
+        var t2 = document.getElementById("texto2").value;
+
+        if (t1 !== "" && t2 !== "") {
+            if (t2.length === 1) {
+                var cantidad = 0;
+
+                for (var i = 0; i < t1.length; i++) {
+                    if (t1.charAt(i) === t2) {
+                        cantidad++;
+                    }
+                }
+
+                if (cantidad > 0) {
+                    document.getElementById("resultadoTextos").value =
+                        "Encontrado " + cantidad + " veces";
+                } else {
+                    document.getElementById("resultadoTextos").value =
+                        "El carácter no fue encontrado";
+                }
+            } else {
+                alert("Ingrese solamente un carácter en Texto 2");
+            }
+        } else {
+            alert("Ingrese los dos campos");
+        }
+    }
+
+    function espacios() {
+        var t1 = document.getElementById("texto1").value;
+
+        if (t1 !== "") {
+            var resultado = "";
+
+            for (var i = 0; i < t1.length; i++) {
+                if (t1.charAt(i) !== " ") {
+                    resultado = resultado + t1.charAt(i);
+                }
+            }
+
+            document.getElementById("resultadoTextos").value = resultado;
+        } else {
+            alert("Ingrese el primer texto");
+        }
+    }
+
+    function insertar() {
+        var t1 = document.getElementById("texto1").value;
+        var t2 = document.getElementById("texto2").value;
+
+        if (t1 !== "" && t2 !== "") {
+            var mitad = Math.floor(t1.length / 2);
+
+            var parte1 = t1.substring(0, mitad);
+            var parte2 = t1.substring(mitad);
+
+            document.getElementById("resultadoTextos").value =
+                parte1 + t2 + parte2;
+        } else {
+            alert("Ingrese los dos textos");
+        }
+    }
+
+    var numeros = [];
+
+    function crear() {
+        var texto = document.getElementById("vector").value;
+
+        if (texto !== "") {
+            var partes = texto.split(",");
+            var nuevoVector = [];
+            var correcto = true;
+
+            for (var i = 0; i < partes.length; i++) {
+                if (partes[i].trim() === "" || isNaN(Number(partes[i]))) {
+                    correcto = false;
+                } else {
+                    nuevoVector[i] = Number(partes[i]);
+                }
+            }
+
+            if (correcto) {
+                numeros = nuevoVector;
+
+                document.getElementById("resultadoVector").value =
+                    "Vector: " + numeros.join(", ");
+            } else {
+                numeros = [];
+                alert("Ingrese números separados correctamente por comas");
+            }
+        } else {
+            alert("Ingrese los números");
+        }
+    }
+
+    function sumarVector() {
+        if (numeros.length > 0) {
+            var suma = 0;
+
+            for (var i = 0; i < numeros.length; i++) {
+                suma = suma + numeros[i];
+            }
+
+            document.getElementById("resultadoVector").value =
+                "Suma: " + suma;
+        } else {
+            alert("Primero debe crear el vector");
+        }
+    }
+
+    function pares() {
+        if (numeros.length > 0) {
+            var resultado = 1;
+            var hayPares = false;
+
+            for (var i = 0; i < numeros.length; i++) {
+                if ((i + 1) % 2 === 0) {
+                    resultado = resultado * numeros[i];
+                    hayPares = true;
+                }
+            }
+
+            if (hayPares) {
+                document.getElementById("resultadoVector").value =
+                    "Multiplicación de posiciones pares: " + resultado;
+            } else {
+                document.getElementById("resultadoVector").value =
+                    "No hay posiciones pares";
+            }
+        } else {
+            alert("Primero debe crear el vector");
+        }
+    }
+
+</script>
+
+</body>
+</html>
